@@ -1,5 +1,4 @@
 const deepEqual = require('deep-equal');
-const useState = require('react').useState;
 
 interface FetchCache {
   fetch?: Promise<void>;

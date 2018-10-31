@@ -1,5 +1,4 @@
 declare const deepEqual: any;
-declare const useState: any;
 interface FetchCache {
     fetch?: Promise<void>;
     error?: any;
