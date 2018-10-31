@@ -1,5 +1,5 @@
 # fetch-suspense
-React Suspense is a React hook that supports the React 16.6 Suspense component implementation.
+`useFetch` is a React hook that supports the React 16.6 Suspense component implementation.
 
 ## Use
 
