@@ -12,7 +12,8 @@
 ```JavaScript
 import useFetch from 'fetch-suspense';
 
-// This fetching component will be delayed by Suspense until the fetch request resolves.
+// This fetching component will be delayed by
+//   Suspense until the fetch request resolves.
 // The return value of useFetch will be the response of the server.
 const MyFetchingComponent = () => {
   const data = useFetch('/path/to/api', { method: 'POST' });
@@ -20,7 +21,8 @@ const MyFetchingComponent = () => {
 };
 
 // The App component wraps the asynchronous fetching component in Suspense.
-// The fallback component (loading text) is displayed until the fetch request resolves.
+// The fallback component (loading text) is
+//   displayed until the fetch request resolves.
 const App = () => {
   return (
     <Suspense fallback="Loading...">
