@@ -41,7 +41,7 @@ const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: 
 
         // Parse the response.
         .then(response => {
-          if (Object.prototype.hasOwnProperty.call(response.headers, 'Content-Type')) {
+          if (response.headers.get('Content-Type')) {
             return response.json();
           }
           return response.text();
