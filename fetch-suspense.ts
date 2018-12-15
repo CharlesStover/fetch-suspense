@@ -41,7 +41,11 @@ const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: 
 
         // Parse the response.
         .then(response => {
-          if (response.headers.get('Content-Type').indexOf("application/json") !== -1) {
+          const contentType = response.headers.get('Content-Type');
+          if (
+            contentType &&
+            contentType.indexOf('application/json') !== -1
+          ) {
             return response.json();
           }
           return response.text();
