@@ -1,5 +1,6 @@
 /node_modules
 /.gitignore
 /.npmignore
+/.travis.yml
 /tsconfig.json
 /fetch-suspense.ts
