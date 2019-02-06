@@ -4,7 +4,7 @@
 
 The design decisions and development process for this package are outlind in the Medium article [React Suspense with the Fetch API](https://medium.com/@Charles_Stover/react-suspense-with-the-fetch-api-a1b7369b0469).
 
-[![version](https://img.shields.io/npm/v/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense/)
+[![version](https://img.shields.io/npm/v/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
 [![minified size](https://img.shields.io/bundlephobia/min/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
 [![downloads](https://img.shields.io/npm/dt/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
