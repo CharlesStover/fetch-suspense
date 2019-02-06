@@ -1,4 +1,4 @@
-# fetch-suspense [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=You%20can%20now%20use%20React%20Suspense%20with%20the%20Fetch%20API!&url=https://github.com/CharlesStover/fetch-suspense&via=CharlesStover&hashtags=react,reactjs,javascript,typescript,webdev,webdevelopment)
+# useFetch [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=You%20can%20now%20use%20React%20Suspense%20with%20the%20Fetch%20API!&url=https://github.com/CharlesStover/fetch-suspense&via=CharlesStover&hashtags=react,reactjs,javascript,typescript,webdev,webdevelopment)
 
 `useFetch` is a React hook that supports the React 16.6 Suspense component implementation.
 
