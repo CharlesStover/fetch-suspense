@@ -2,7 +2,7 @@
 
 `useFetch` is a React hook that supports the React 16.6 Suspense component implementation.
 
-[![package](https://img.shields.io/npm/v/fetch-suspense.svg)](https://travis-ci.com/CharlesStover/fetch-suspense/)
+[![version](https://img.shields.io/npm/v/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense/)
 [![build](https://api.travis-ci.com/CharlesStover/fetch-suspense.svg)](https://travis-ci.com/CharlesStover/fetch-suspense/)
 [![downloads](https://img.shields.io/npm/dt/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
 [![minified size](https://img.shields.io/bundlephobia/min/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
