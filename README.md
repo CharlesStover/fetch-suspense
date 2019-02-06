@@ -1,7 +1,8 @@
-# fetch-suspense
+# fetch-suspense [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=fetch-suspense%20is%20a%20React%20hook%20that%20supports%20the%20Suspense%20component!&url=https://github.com/CharlesStover/fetch-suspense&via=CharlesStover&hashtags=react,reactjs,javascript,typescript,webdev,webdevelopment)
+
 `useFetch` is a React hook that supports the React 16.6 Suspense component implementation.
 
-[![package](https://img.shields.io/github/package-json/v/CharlesStover/fetch-suspense.svg)](https://travis-ci.com/CharlesStover/fetch-suspense/)
+[![package](https://img.shields.io/npm/v/fetch-suspense.svg)](https://travis-ci.com/CharlesStover/fetch-suspense/)
 [![build](https://api.travis-ci.com/CharlesStover/fetch-suspense.svg)](https://travis-ci.com/CharlesStover/fetch-suspense/)
 [![downloads](https://img.shields.io/npm/dt/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
 [![minified size](https://img.shields.io/bundlephobia/min/fetch-suspense.svg)](https://www.npmjs.com/package/fetch-suspense)
