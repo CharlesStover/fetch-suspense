@@ -1,6 +1,7 @@
 const deepEqual = require('deep-equal');
 
 interface FetchCache {
+  client: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>;
   fetch?: Promise<void>;
   error?: any;
   init: RequestInit | undefined;
@@ -10,11 +11,26 @@ interface FetchCache {
 
 const fetchCaches: FetchCache[] = [];
 
-const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: number = 0) => {
+interface UseFetchConfig {
+  client?: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>;
+  lifespan?: number;
+}
+
+const useFetch = (input: RequestInfo, init?: RequestInit | undefined, config?: UseFetchConfig | number) => {
+  let client = fetch/* implicit global */;
+  let lifespan: number = 0;
+  if (typeof config === "object") {
+    client = config.client || client;
+    lifespan = config.lifespan || lifespan;
+  } else if (typeof config === "number") {
+    lifespan = config;
+  }
+
   for (const fetchCache of fetchCaches) {
 
     // The request hasn't changed since the last call.
     if (
+      client === fetchCache.client &&
       deepEqual(input, fetchCache.input) &&
       deepEqual(init, fetchCache.init)
     ) {
@@ -34,10 +50,11 @@ const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: 
 
   // The request is new or has changed.
   const fetchCache: FetchCache = {
+    client,
     fetch:
 
       // Make the fetch request.
-      fetch(input, init)
+      client(input, init)
 
         // Parse the response.
         .then(response => {

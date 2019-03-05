@@ -1,5 +1,6 @@
 declare const deepEqual: any;
 interface FetchCache {
+    client: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>;
     fetch?: Promise<void>;
     error?: any;
     init: RequestInit | undefined;
@@ -7,4 +8,8 @@ interface FetchCache {
     response?: any;
 }
 declare const fetchCaches: FetchCache[];
-declare const useFetch: (input: RequestInfo, init?: RequestInit | undefined, lifespan?: number) => any;
+interface UseFetchConfig {
+    client?: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>;
+    lifespan?: number;
+}
+declare const useFetch: (input: RequestInfo, init?: RequestInit | undefined, config?: number | UseFetchConfig | undefined) => any;
