@@ -80,4 +80,4 @@ const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: 
   throw fetchCache.fetch;
 };
 
-export default useFetch;
+export = useFetch;
