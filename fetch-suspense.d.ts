@@ -8,3 +8,6 @@ interface FetchCache {
 }
 declare const fetchCaches: FetchCache[];
 declare const useFetch: (input: RequestInfo, init?: RequestInit | undefined, lifespan?: number) => any;
+
+export { useFetch };
+export default useFetch;
