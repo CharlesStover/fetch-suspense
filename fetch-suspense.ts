@@ -11,6 +11,8 @@ interface FetchCache {
 const createUseFetch = (fetch: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>) => {
   const fetchCaches: FetchCache[] = [];
 
+  const jsonContentTypes: string[] = [ 'application/json', 'application/vnd.api+json' ];
+
   return (input: RequestInfo, init?: RequestInit | undefined, lifespan: number = 0) => {
     for (const fetchCache of fetchCaches) {
   
@@ -45,7 +47,7 @@ const createUseFetch = (fetch: (input: RequestInfo, init?: RequestInit | undefin
             const contentType = response.headers.get('Content-Type');
             if (
               contentType &&
-              contentType.indexOf('application/json') !== -1
+              jsonContentTypes.indexOf(contentType) !== -1
             ) {
               return response.json();
             }
