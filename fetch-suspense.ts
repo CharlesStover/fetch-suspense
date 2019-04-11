@@ -82,4 +82,4 @@ const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: 
 
 module.exports = useFetch;
 module.exports.default = useFetch;
-module.exports.useFetch= useFetch;
+module.exports.useFetch = useFetch;
