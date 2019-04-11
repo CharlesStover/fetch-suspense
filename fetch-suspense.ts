@@ -1,4 +1,4 @@
-const deepEqual = require('deep-equal');
+import deepEqual = require("deep-equal");
 
 interface FetchCache {
   fetch?: Promise<void>;
@@ -80,4 +80,4 @@ const useFetch = (input: RequestInfo, init?: RequestInit | undefined, lifespan: 
   throw fetchCache.fetch;
 };
 
-module.exports = useFetch;
+export = useFetch;
