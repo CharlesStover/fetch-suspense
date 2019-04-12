@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "downlevelIteration": true,
-    "lib": [ "dom", "es5", "es2015.promise", "scripthost" ],
+    "lib": [ "dom", "es5", "es2015.promise", "es2017", "scripthost" ],
     "module": "commonjs",
     "moduleResolution": "Node",
     "noFallthroughCasesInSwitch": true,
@@ -18,5 +18,5 @@
     "strictPropertyInitialization": true,
     "target": "es5"
   },
-  "files": [ "fetch-suspense.ts" ]
+  "files": [ "src/fetch-suspense.ts" ]
 }

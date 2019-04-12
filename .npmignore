@@ -1,6 +1,9 @@
 /node_modules
+/src
+/tests
 /.gitignore
+/.mocharc.js
 /.npmignore
 /.travis.yml
 /tsconfig.json
-/fetch-suspense.ts
+/yarn.lock

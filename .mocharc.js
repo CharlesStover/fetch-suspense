@@ -1,0 +1,21 @@
+module.exports = {
+  allowUncaught: false,
+  checkLeaks: true,
+  color: true,
+  diff: true,
+  extension: [ 'ts' ],
+  forbidOnly: true,
+  forbidPending: true,
+  fullTrace: false,
+  inlineDiff: true,
+  recursive: true,
+  require: [
+    '@babel/register',
+    'chai/register-expect',
+    'jsdom-global/register',
+    'ts-node/register',
+  ],
+  sort: true,
+  watch: false,
+  watchExtensions: [ 'ts' ],
+};

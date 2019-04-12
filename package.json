@@ -1,6 +1,6 @@
 {
   "name": "fetch-suspense",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": "Charles Stover <npmjs@charlesstover.com>",
   "bugs": {
     "url": "https://github.com/CharlesStover/fetch-suspense/issues"
@@ -14,14 +14,25 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "test": "exit 0"
+    "test": "mocha tests/**/*.test.ts"
   },
   "dependencies": {
     "deep-equal": "^1.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "@types/chai": "^4.1.7",
     "@types/deep-equal": "^1.0.1",
+    "@types/mocha": "^5.2.6",
     "@types/node": "^10.12.1",
+    "@types/sinon": "^7.0.11",
+    "chai": "^4.2.0",
+    "jsdom": "^14.0.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^6.1.3",
+    "sinon": "^7.3.1",
+    "ts-node": "^8.0.3",
     "typescript": "^3.1.5"
   }
 }
