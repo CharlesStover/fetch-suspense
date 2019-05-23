@@ -3,7 +3,7 @@
 `useFetch` is a React hook that supports the React 16.6 Suspense component
 implementation.
 
-The design decisions and development process for this package are outlind in
+The design decisions and development process for this package are outlined in
 the Medium article
 [React Suspense with the Fetch API](https://medium.com/@Charles_Stover/react-suspense-with-the-fetch-api-a1b7369b0469).
 
