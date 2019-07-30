@@ -10,18 +10,60 @@ interface Export extends UseFetch {
 }
 
 interface FetchCache {
+  bodyUsed?: boolean;
+  contentType?: null | string;
   fetch?: Promise<void>;
   error?: any;
+  headers?: Headers;
   init: RequestInit | undefined;
   input: RequestInfo;
+  ok?: boolean;
+  redirected?: boolean;
   response?: any;
+  status?: number;
+  statusText?: string;
+  url?: string;
 }
 
-type UseFetch = (
-  input: RequestInfo,
-  init?: RequestInit | undefined,
-  lifespan?: number,
-) => Object | string;
+type FetchResponse = Object | string;
+
+interface FetchResponseMetadata {
+  bodyUsed: boolean;
+  contentType: null | string;
+  headers: Headers;
+  ok: boolean;
+  redirected: boolean;
+  response: FetchResponse;
+  status: number;
+  statusText: string;
+  url: string;
+}
+
+interface Options {
+  lifespan?: number;
+  metadata?: boolean;
+}
+
+interface OptionsWithMetadata extends Options {
+  metadata: true;
+}
+
+interface OptionsWithoutMetadata extends Options {
+  metadata?: false;
+}
+
+interface UseFetch {
+  (
+    input: RequestInfo,
+    init?: RequestInit | undefined,
+    options?: number | OptionsWithoutMetadata,
+  ): FetchResponse;
+  (
+    input: RequestInfo,
+    init: RequestInit | undefined,
+    options: OptionsWithMetadata,
+  ): FetchResponseMetadata;
+}
 
 
 
@@ -32,11 +74,27 @@ const createUseFetch: CreateUseFetch = (
   // Create a set of caches for this hook.
   const caches: FetchCache[] = [];
 
-  return (
+  function useFetch(
     input: RequestInfo,
     init?: RequestInit | undefined,
-    lifespan: number = 0,
-  ): Object | string => {
+    options?: number | OptionsWithoutMetadata,
+  ): FetchResponse;
+  function useFetch(
+    input: RequestInfo,
+    init: RequestInit | undefined,
+    options: OptionsWithMetadata,
+  ): FetchResponseMetadata;
+  function useFetch(
+    input: RequestInfo,
+    init?: RequestInit | undefined,
+    options: number | Options = 0,
+  ): FetchResponse | FetchResponseMetadata {
+
+    if (typeof options === 'number') {
+      return useFetch(input, init, { lifespan: options });
+    }
+
+    const { metadata = false, lifespan = 0 } = options;
 
     // Check each cache by this useFetch hook.
     for (const cache of caches) {
@@ -55,6 +113,19 @@ const createUseFetch: CreateUseFetch = (
   
         // If a response was successful, return it.
         if (Object.prototype.hasOwnProperty.call(cache, 'response')) {
+          if (metadata) {
+            return {
+              bodyUsed: cache.bodyUsed,
+              contentType: cache.contentType,
+              headers: cache.headers,
+              ok: cache.ok,
+              redirected: cache.redirected,
+              response: cache.response,
+              status: cache.status,
+              statusText: cache.statusText,
+              url: cache.url,
+            };
+          }
           return cache.response;
         }
 
@@ -71,12 +142,19 @@ const createUseFetch: CreateUseFetch = (
       fetch: fetch(input, init)
 
         // Parse the response.
-        .then((response: Response): Promise<Object | string> => {
-          const contentType: null | string =
-            response.headers.get('Content-Type');
+        .then((response: Response): Promise<FetchResponse> => {
+          cache.contentType = response.headers.get('Content-Type');
+          if (metadata) {
+            cache.bodyUsed = response.bodyUsed;
+            cache.headers = response.headers;
+            cache.ok = response.ok;
+            cache.redirected = response.redirected;
+            cache.status = response.status;
+            cache.statusText = response.statusText;
+          }
           if (
-            contentType &&
-            contentType.indexOf('application/json') !== -1
+            cache.contentType &&
+            cache.contentType.indexOf('application/json') !== -1
           ) {
             return response.json();
           }
@@ -84,7 +162,7 @@ const createUseFetch: CreateUseFetch = (
         })
 
         // Cache the response.
-        .then((response: Object | string): void => {
+        .then((response: FetchResponse): void => {
           cache.response = response;
         })
 
@@ -112,7 +190,9 @@ const createUseFetch: CreateUseFetch = (
     };
     caches.push(cache);
     throw cache.fetch;
-  };
+  }
+
+  return useFetch;
 };
 
 const _export: Export = Object.assign(
