@@ -147,3 +147,9 @@ interface UseFetchResponse {
 
 You can access these properties easily through destructuring. See
 [Including Fetch Metadata](#including-fetch-metadata).
+
+## Sponsor 💗
+
+If you are a fan of this project, you may
+[become a sponsor](https://github.com/sponsors/CharlesStover)
+via GitHub's Sponsors Program.
