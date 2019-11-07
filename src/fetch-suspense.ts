@@ -2,7 +2,7 @@ import deepEqual = require('deep-equal');
 
 
 
-type CreateUseFetch = (fetch: GlobalFetch['fetch']) => UseFetch;
+type CreateUseFetch = (fetch: WindowOrWorkerGlobalScope['fetch']) => UseFetch;
 
 interface Export extends UseFetch {
   createUseFetch: CreateUseFetch;
