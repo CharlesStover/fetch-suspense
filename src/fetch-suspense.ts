@@ -1,8 +1,10 @@
 import deepEqual = require('deep-equal');
 
+interface GlobalFetch { }
+interface WindowOrWorkerGlobalScope { }
+interface GlobalFetchOrWindowOrWorkerGlobalScope extends GlobalFetch, WindowOrWorkerGlobalScope { }
 
-
-type CreateUseFetch = (fetch: WindowOrWorkerGlobalScope['fetch']) => UseFetch;
+type CreateUseFetch = (fetch: GlobalFetchOrWindowOrWorkerGlobalScope['fetch']) => UseFetch;
 
 interface Export extends UseFetch {
   createUseFetch: CreateUseFetch;
@@ -68,7 +70,7 @@ interface UseFetch {
 
 
 const createUseFetch: CreateUseFetch = (
-  fetch: GlobalFetch['fetch'],
+  fetch: GlobalFetchOrWindowOrWorkerGlobalScope['fetch'],
 ): UseFetch => {
 
   // Create a set of caches for this hook.
