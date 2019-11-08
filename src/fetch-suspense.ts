@@ -1,6 +1,6 @@
 import deepEqual = require('deep-equal');
 
-
+type FetchFunction = typeof window.fetch;
 
 type CreateUseFetch = (fetch: FetchFunction) => UseFetch;
 
@@ -25,8 +25,6 @@ interface FetchCache {
   url?: string;
 }
 
-type FetchFunction = WindowOrWorkerGlobalScope extends HasFetch ? WindowOrWorkerGlobalScope['fetch'] : GlobalFetch['fetch'];
-
 type FetchResponse = Object | string;
 
 interface FetchResponseMetadata {
@@ -39,12 +37,6 @@ interface FetchResponseMetadata {
   status: number;
   statusText: string;
   url: string;
-}
-
-interface GlobalFetch { }
-
-interface HasFetch {
-    fetch: Function;
 }
 
 interface Options {
@@ -72,10 +64,6 @@ interface UseFetch {
     options: OptionsWithMetadata,
   ): FetchResponseMetadata;
 }
-
-interface WindowOrWorkerGlobalScope { }
-
-
 
 const createUseFetch: CreateUseFetch = (
   fetch: FetchFunction,
