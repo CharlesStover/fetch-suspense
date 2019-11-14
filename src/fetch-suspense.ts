@@ -1,8 +1,8 @@
 import deepEqual = require('deep-equal');
 
+type FetchFunction = typeof window.fetch;
 
-
-type CreateUseFetch = (fetch: GlobalFetch['fetch']) => UseFetch;
+type CreateUseFetch = (fetch: FetchFunction) => UseFetch;
 
 interface Export extends UseFetch {
   createUseFetch: CreateUseFetch;
@@ -65,10 +65,8 @@ interface UseFetch {
   ): FetchResponseMetadata;
 }
 
-
-
 const createUseFetch: CreateUseFetch = (
-  fetch: GlobalFetch['fetch'],
+  fetch: FetchFunction,
 ): UseFetch => {
 
   // Create a set of caches for this hook.
