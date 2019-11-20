@@ -193,10 +193,25 @@ const createUseFetch: CreateUseFetch = (
   return useFetch;
 };
 
+// Ensure `window` and `window.fetch` is present.
+const missing = typeof window === 'undefined'
+  ? 'window'
+  : window.fetch
+    ? false
+    : 'window.fetch';
+
+// If `window.fetch` is missing, throw an error when
+// called with a message to use `createUseFetch` instead.
+const defaultVal = missing
+  ? () => {
+    throw new Error('Cannot find `' + missing + '`. Use `createUseFetch` and provide `fetch` function.');
+  }
+  : createUseFetch(window.fetch);
+
 const _export: Export = Object.assign(
-  createUseFetch(window.fetch), {
+  defaultVal, {
   createUseFetch,
-  default: createUseFetch(window.fetch)
+  default: defaultVal
 });
 
 export = _export;
