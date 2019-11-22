@@ -3,8 +3,6 @@ import { Headers as NodeFetchHeaders } from 'node-fetch';
 import { createUseFetch } from '../fetch-suspense';
 import CommonJS = require('../fetch-suspense');
 
-
-
 type FetchResponse = Object | string;
 
 interface FetchResponseMetadata {
@@ -42,8 +40,6 @@ interface UseFetch {
     options: OptionsWithMetadata,
   ): FetchResponseMetadata;
 }
-
-
 
 const MOCK_BODY: string = 'mock body';
 
@@ -84,8 +80,6 @@ const MOCK_RESPONSE: Response = {
 
 const MOCK_FETCH = (): Promise<Response> => Promise.resolve(MOCK_RESPONSE);
 
-
-
 describe('createUseFetch', (): void => {
 
   it('should be a function with 1 parameter via CommonJS', (): void => {
@@ -99,7 +93,6 @@ describe('createUseFetch', (): void => {
   });
 
   describe('return value', (): void => {
-
     it('should be a function with 3 parameters via CommonJS', (): void => {
       const useFetch = CommonJS.createUseFetch(MOCK_FETCH);
       expect(useFetch).to.be.a('function');

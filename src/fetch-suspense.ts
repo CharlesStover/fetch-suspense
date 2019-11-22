@@ -2,7 +2,7 @@ import deepEqual = require('deep-equal');
 
 type FetchFunction = typeof window.fetch;
 
-type CreateUseFetch = (fetch: FetchFunction) => UseFetch;
+type CreateUseFetch = (fetch?: FetchFunction) => UseFetch;
 
 interface Export extends UseFetch {
   createUseFetch: CreateUseFetch;
@@ -65,10 +65,27 @@ interface UseFetch {
   ): FetchResponseMetadata;
 }
 
-const createUseFetch: CreateUseFetch = (
-  fetch: FetchFunction,
-): UseFetch => {
+const getDefaultFetchFunction = (): FetchFunction => {
+  if (typeof window === 'undefined') {
+    return (): Promise<Response> => {
+      return Promise.reject(
+        new Error('Cannot find `window`. Use `createUseFetch` to provide a custom `fetch` function.'),
+      );
+    };
+  }
+  if (typeof window.fetch === 'undefined') {
+    return (): Promise<Response> => {
+      return Promise.reject(
+        new Error('Cannot find `window.fetch`. Use `createUseFetch` to provide a custom `fetch` function.'),
+      );
+    };
+  }
+  return window.fetch;
+};
 
+const createUseFetch: CreateUseFetch = (
+  fetch: FetchFunction = getDefaultFetchFunction(),
+): UseFetch => {
   // Create a set of caches for this hook.
   const caches: FetchCache[] = [];
 
@@ -193,25 +210,10 @@ const createUseFetch: CreateUseFetch = (
   return useFetch;
 };
 
-// Ensure `window` and `window.fetch` is present.
-const missing = typeof window === 'undefined'
-  ? 'window'
-  : window.fetch
-    ? false
-    : 'window.fetch';
-
-// If `window.fetch` is missing, throw an error when
-// called with a message to use `createUseFetch` instead.
-const defaultVal = missing
-  ? () => {
-    throw new Error('Cannot find `' + missing + '`. Use `createUseFetch` and provide `fetch` function.');
-  }
-  : createUseFetch(window.fetch);
-
 const _export: Export = Object.assign(
-  defaultVal, {
+  createUseFetch(), {
   createUseFetch,
-  default: defaultVal
+  default: createUseFetch(),
 });
 
 export = _export;
